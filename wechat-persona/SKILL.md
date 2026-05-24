@@ -1,6 +1,6 @@
 ---
 name: wechat-persona
-description: Distill a WeChat Official Account (微信公众号) into a reusable persona profile by batch-downloading its recent articles via wechat-article-exporter (down.mptext.top), cleaning the markdown, and synthesizing the author's voice/framework/blind-spots into a PERSONA.md you can later @-reference for "what would this author say about X?" reasoning. Use whenever the user wants to: archive a specific WeChat account's articles ("把某公众号的文章批量下载下来"、"导出微信公众号近X个月的文章"、"挖某个公众号的内容"), turn a domain-expert account into an advisory persona ("把这个公众号蒸馏成一个角色"、"按这个公众号作者的视角分析"、"模仿挥手看天空的判断风格"), or mentions wechat-article-exporter / down.mptext.top by name. Trigger on Chinese phrases like "公众号蒸馏"、"公众号导出"、"公众号批量下载"、"把XX公众号变成顾问". Skip for: searching one-off articles (use sogou/weixin search instead), or accounts the user merely wants to read once.
+description: Distill a WeChat Official Account (微信公众号) into a reusable persona profile by batch-downloading its recent articles via wechat-article-exporter (down.mptext.top), cleaning the markdown, and synthesizing the author's voice/framework/blind-spots into a PERSONA.md you can later @-reference for "what would this author say about X?" reasoning. Use whenever the user wants to: archive a specific WeChat account's articles ("把某公众号的文章批量下载下来"、"导出微信公众号近X个月的文章"、"挖某个公众号的内容"), turn a domain-expert account into an advisory persona ("把这个公众号蒸馏成一个角色"、"按这个公众号作者的视角分析"、"模仿曲曲大女人的判断风格"), or mentions wechat-article-exporter / down.mptext.top by name. Trigger on Chinese phrases like "公众号蒸馏"、"公众号导出"、"公众号批量下载"、"把XX公众号变成顾问". Skip for: searching one-off articles (use sogou/weixin search instead), or accounts the user merely wants to read once.
 ---
 
 # 公众号蒸馏 · wechat-persona
@@ -13,7 +13,7 @@ description: Distill a WeChat Official Account (微信公众号) into a reusable
 
 **借现成工具 wechat-article-exporter 把文章离线下来 → 让 Claude 通读 → 提炼成可复用的人格档案。**
 
-之后用户可以随时调用："以挥手看天空的判断风格看这条 K 线"、"按 XX 医生的逻辑评估这个症状要不要去医院"——本质是把"一个我信赖的脑子"持久化下来。
+之后用户可以随时调用："以曲曲大女人的判断风格看这条 K 线"、"按 XX 医生的逻辑评估这个症状要不要去医院"——本质是把"一个我信赖的脑子"持久化下来。
 
 ## 前置条件
 
@@ -61,7 +61,7 @@ navigate https://down.mptext.top
 
 完成判断：按钮恢复蓝色 + 该行"已同步消息数"≈ 时间范围内文章数。
 
-去"文章下载"页（侧边栏），从顶部下拉选目标公众号（item 文本类似"挥手看天空 (120篇)"），表格出现文章列表。
+去"文章下载"页（侧边栏），从顶部下拉选目标公众号（item 文本类似"曲曲大女人 (120篇)"），表格出现文章列表。
 
 **全选**：点表头复选框（坐标约 `(338, 168)`），底部状态栏显示"已选 N/N"。点右上"抓取"下拉 → 选"文章内容"（"阅读量"/"留言"需要 credential，跳过）。
 
@@ -89,10 +89,10 @@ navigate https://down.mptext.top
 **A. 文件开头的 CSS 样式（第 1 行）** —— 微信公众号 `<style>` 内容被当文本输出。
 **B. 文件末尾的 SVG 按钮图标行** —— "阅读 / 赞 / 分享 / 推荐 / 留言"按钮的内联 `data:image/svg+xml`，一长串干扰阅读。
 
-PowerShell 一把梭（Windows，用户桌面 `挥手看天空-md` 为例）：
+PowerShell 一把梭（Windows，用户桌面 `曲曲大女人-md` 为例）：
 
 ```powershell
-$target = "C:\Users\<USER>\Desktop\挥手看天空-md"
+$target = "C:\Users\<USER>\Desktop\曲曲大女人-md"
 
 # 清 A：删第 1 行 CSS（仅在确认是 CSS 时删）
 Get-ChildItem -Path $target -Filter "*.md" | ForEach-Object {
@@ -115,7 +115,7 @@ Get-ChildItem -Path $target -Filter "*.md" | ForEach-Object {
 Bash 版（macOS/Linux）：
 
 ```bash
-cd "$HOME/Desktop/挥手看天空-md"
+cd "$HOME/Desktop/曲曲大女人-md"
 for f in *.md; do
   # 清 A
   head -1 "$f" | grep -qE 'font-family|margin|padding|body *\{' && sed -i '' '1,2d' "$f"
@@ -154,7 +154,7 @@ done
 - 一句话总结这个人的"信条"
 
 ## 5. 语言风格
-- 标志性开场 / 收尾（如挥手看天空的"就这"、"各位祝好"）
+- 标志性开场 / 收尾（该作者反复出现的固定句式，需从文章里实际找到具体例子，不要凭印象编造）
 - 高频词、口头禅
 - 句式特征（长句 vs 短句、是否爱用反问、是否爱用具体数字）
 
