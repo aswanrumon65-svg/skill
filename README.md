@@ -16,6 +16,38 @@ Claude 是个通才。但有些事情，专才更靠谱：
 
 ## 已发布 Skills
 
+### 📜 wechat-persona（公众号蒸馏）
+
+**做什么**
+
+把一个你长期关注的微信公众号的近期文章批量抓下来 → 清洗成干净 Markdown → 让 Claude 通读后蒸馏出一份 `PERSONA.md`：作者的核心议题、思维框架、语言风格、价值观、盲区都列清楚。之后你随时可以喊"**以 XX 公众号的视角看这条 K 线 / 这个症状 / 这个新闻**"，Claude 会套用这个 persona 给你辅助判断。
+
+**为什么需要这个**
+
+公众号里那些你信赖的"专家脑子"——财经号、医学号、行业观察号——平时只能等他们更新。这个 skill 把"一个我信赖的脑子"**持久化**下来变成你的私人顾问。
+
+**触发场景**
+
+- "把'挥手看天空'这个公众号近半年的文章批量下下来"
+- "导出 XX 公众号最近三个月的内容"
+- "把这个公众号蒸馏成一个角色，我以后用来辅助判断"
+- "按 XX 作者的判断风格分析一下这个"
+- 显式说："公众号蒸馏"、"公众号导出"、"用 wechat-article-exporter"
+
+**工作原理**
+
+借现成开源工具 [wechat-article-exporter](https://github.com/wechat-article/wechat-article-exporter)（在线站 `down.mptext.top`）抓文章，Claude in Chrome 全程驱动浏览器：添加目标号 → 设时间范围 → 同步 + 抓正文 → 导出 Markdown 到桌面 → 清洗 → 通读样本生成 PERSONA.md。
+
+**前置条件**
+
+- 已安装 [Claude for Chrome](https://claude.ai/chrome) 扩展
+- **你本人有一个微信公众号**（订阅号即可，免费申请，1 分钟）—— 工具需要扫码登录你自己的号
+- Windows 本机能跑 PowerShell（清洗脚本）；macOS/Linux 用 Bash 等价命令
+
+详细流程、踩坑记录、tool 调用顺序：[`wechat-persona/SKILL.md`](./wechat-persona/SKILL.md)
+
+---
+
 ### 🐦 ask-grok（系列第一个）
 
 **做什么**
@@ -88,6 +120,7 @@ Claude 应当响应一个进入该 skill 的回复（通常会调用 `mcp__Claud
 | 状态 | Skill | 用途 |
 |---|---|---|
 | ✅ Released | **ask-grok** | 通过 Grok 查 X (Twitter) 实时信息 |
+| ✅ Released | **wechat-persona** | 把微信公众号蒸馏成可调用的 persona 顾问 |
 | 🔜 规划中 | … | 更多"外接大脑" skill 陆续添加 |
 
 有想接入的外部 AI / 平台？欢迎在 issue 里提。
