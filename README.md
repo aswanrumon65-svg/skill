@@ -1,5 +1,7 @@
 # Claude Skills — 日常好用 Skill 合集 · Handy Daily Skills
 
+🌐 **中文** · [English](./README.en.md)
+
 > 让 Claude 在自己不擅长的事情上，自动调用最合适的外部 AI / 平台。
 
 Claude 是个通才。但有些事情，专才更靠谱：
